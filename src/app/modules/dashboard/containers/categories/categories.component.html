@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col">
+    <div class="card shadow">
+      <div class="card-header">
+        <div class="row justify-content-around">
+          <div class="col-md-10">
+            <h4 class="h6 m-0 font-weight-bold text-primary">Categorías</h4>
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-primary btn-sm btn-user" (click)="openModalCreate()"
+              data-target="#exampleModal">
+              <i class="fas fa-plus-circle"></i> Categoría
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+
+          <table class="table table-hover" >
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td class="text-center">Acciones</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of categoryService.categories">
+                <td> {{ item.name }}</td>
+                <td>
+                  <div class="row justify-content-center">
+                    <i class="fas fa-edit  btn btn-success mr-1 " (click)="openModalUpdate(item)"></i>
+                    <i class="fas fa-trash-alt  btn btn-danger  "  (click)="deleteCategory(item)"></i>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal -->
+
+  <div class="fontModal"  [ngClass]="hiddenModal">
+
+    <div class="modal animated--grow-in" style="display: block;" id="exampleModal"  tabindex="-1"  aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col">
+              <div class="card shadow">
+                <div class="card-header">
+                  <div class="row justify-content-around">
+                    <h4 class="h6 m-0 font-weight-bold text-primary">Registrar categoría</h4>
+                    <button type="button" class="close ml-auto" (click)="closeDialog()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+                <form ngNativeValidate #f="ngForm" (ngSubmit)="saveCategory()" class="user">
+                  <div class="card-body">
+                    <div class="form-group row">
+
+                      <input type="text"  name="name" [(ngModel)]="category.name"  class="form-control form-control-user"
+                      required minlength="4" placeholder="Nombre categoría" />
+                    </div>
+                    <div class="fom-group">
+                      <button type="submit" *ngIf="regiter" class="btn btn-outline-primary btn-block btn-user">Registrar</button>
+                      <button type="submit" *ngIf="!regiter" class="btn btn-outline-primary btn-block btn-user">Actualizar</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+

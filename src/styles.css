@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.hideModal{
+  display: none;
+}
+
+.fontModal{
+
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 9999;
+  top: 0px;
+  left: 0px;
+}

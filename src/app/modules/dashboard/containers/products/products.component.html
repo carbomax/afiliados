@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-10">
+            <h4 class="h6 m-0 font-weight-bold text-primary">Registrados</h4>
+          </div>
+
+          <div class="col-md-2">
+            <button type="button" class="btn btn-primary btn-sm btn-user" data-toggle="modal" data-target="#exampleModal">
+              <i class="fas fa-plus-circle"></i> Producto
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Precio</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>$170,750</td>
+                <td>61</td>
+                <td>2011/04/25</td>
+                <td>
+                  <div class="row justify-content-center">
+                    <i class="fas fa-edit  btn btn-success mr-1 "></i>
+                    <i class="fas fa-trash-alt  btn btn-danger  "></i>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>$170,750</td>
+                <td>63</td>
+                <td>2011/07/25</td>
+                <td>$170,750</td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col">
+            <div class="card shadow">
+              <div class="card-header">
+               <div class="row justify-content-around">
+                <h4 class="h6 m-0 font-weight-bold text-primary">Registrar producto</h4>
+                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+               </div>
+              </div>
+              <div class="card-body row">
+                <form class="user">
+
+                  <div class="form-group">
+                    <input type="text" class="form-control form-control-user" placeholder="Título del producto" />
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control form-control-user" placeholder="Categoria" />
+                    </div>
+
+                    <div class="col-sm-4">
+                      <input type="number" class="form-control form-control-user" placeholder="Precio" />
+                    </div>
+                    <div class="col-sm-3">
+                      <button type="button" class="btn btn-primary shadow" data-toggle="modal"
+                        data-target="#exampleModal"><i class="fas fa-image fa-2x"></i></button>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <textarea class="form-control" rows="10" placeholder="Descripción..."></textarea>
+                  </div>
+
+                  <div class="fom-group">
+                    <button type="button" class="btn btn-outline-primary btn-block btn-user">Registrar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
