@@ -8,17 +8,20 @@ import { ProductsComponent } from './containers/products/products.component';
 import { WelcomeComponent } from './containers/welcome/welcome.component';
 import { CategoriesComponent } from './containers/categories/categories.component';
 import { AppCommonModule } from '../common/app-common.module';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component'
+import { PipesModule } from './pipes/pipes.module';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, HeaderComponent, SidebardComponent, ProductsComponent, WelcomeComponent, CategoriesComponent],
+  declarations: [DashboardComponent, HeaderComponent, SidebardComponent, ProductsComponent, WelcomeComponent, CategoriesComponent, BreadcrumbsComponent],
   exports: [DashboardComponent,HeaderComponent, SidebardComponent, ProductsComponent, WelcomeComponent],
   imports: [
     CommonModule,
     AppCommonModule,
     FormsModule,
+    PipesModule,
     DashboardRoutingModule
   ]
 })

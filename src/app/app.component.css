@@ -1,0 +1,6 @@
+.conten{
+  background: #aa4b6b;
+  background: -webkit-linear-gradient(to bottom, #3b8d99, #6b6b83, #aa4b6b);
+  background: linear-gradient(to bottom, #3b8d99, #6b6b83, #aa4b6b);
+  height: 100vh;
+}

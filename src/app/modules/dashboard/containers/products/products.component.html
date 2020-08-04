@@ -8,7 +8,8 @@
           </div>
 
           <div class="col-md-2">
-            <button type="button" class="btn btn-primary btn-sm btn-user" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" (click)="openModalCreate()" class="btn btn-primary btn-sm btn-user"
+              data-target="#exampleModal">
               <i class="fas fa-plus-circle"></i> Producto
             </button>
           </div>
@@ -31,91 +32,137 @@
             </thead>
 
             <tbody>
-              <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>$170,750</td>
-                <td>61</td>
-                <td>2011/04/25</td>
+              <tr *ngFor="let product of productService.products">
+                <td class="img-50">
+                  <img class="img-fluid rounded-pill img-50" src="{{product.photo | image }}" alt="">
+                </td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.category.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.description | slice:0:20}}..</td>
                 <td>
                   <div class="row justify-content-center">
-                    <i class="fas fa-edit  btn btn-success mr-1 "></i>
-                    <i class="fas fa-trash-alt  btn btn-danger  "></i>
+                    <i class="fas fa-edit  btn btn-success mr-1 " (click)="openModalUpdate(product)"></i>
+                    <i class="fas fa-trash-alt  btn btn-danger  " (click)="deleteProduct(product)"></i>
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>$170,750</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-              </tr>
             </tbody>
-
           </table>
+
+
+            <button class="btn btn-outline-secondary" (click)="changePagination(-5)" >Anteriores</button>
+            <button  class="btn btn-outline-secondary" (click)="changePagination(5)" >Siguientes</button>
+
+
         </div>
       </div>
-
-
     </div>
   </div>
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
+<div class="fontModal" [ngClass]="hiddenModal">
+  <!-- Modal -->
+  <div class="modal animated--grow-in" id="exampleModal" style="display: block;" tabindex="-1"  aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
 
-        <div class="row">
-          <div class="col">
-            <div class="card shadow">
-              <div class="card-header">
-               <div class="row justify-content-around">
-                <h4 class="h6 m-0 font-weight-bold text-primary">Registrar producto</h4>
-                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-               </div>
-              </div>
-              <div class="card-body row">
-                <form class="user">
-
-                  <div class="form-group">
-                    <input type="text" class="form-control form-control-user" placeholder="Título del producto" />
+          <div class="row">
+            <div class="col">
+              <div class="card shadow">
+                <div class="card-header">
+                  <div class="row justify-content-around">
+                    <h4 class="h6 m-0 font-weight-bold text-primary">Registrar producto</h4>
+                    <button type="button" (click)="closeDialog()" class="close ml-auto" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
+                </div>
+                <div class="card-body">
+                  <form ngNativeValidate #f="ngForm" (ngSubmit)="saveProduct(f)" class="user">
 
-                  <div class="form-group row">
-                    <div class="col-sm-5">
-                      <input type="text" class="form-control form-control-user" placeholder="Categoria" />
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="form-group">
+                          <input type="text" name="title" [(ngModel)]="product.title"
+                            class="form-control form-control-user" placeholder="Título del producto" required />
+
+                        </div>
+                        <div *ngIf="error" class="alert alert-danger" role="alert">
+                          <strong>Este producto ya existe.</strong>
+                        </div>
+
+                        <div class="form-group row">
+                          <div class="col-sm-5">
+                            <select name="category" [(ngModel)]="product.category._id" class="custom-select" required>
+                              <option value="" selected>Seleccione la categoria</option>
+                              <option *ngFor="let category of categoryService.categories" [value]="category._id">
+                                {{ category.name }}
+                              </option>
+
+                            </select>
+                          </div>
+
+                          <div class="col-sm-3">
+                            <input type="number" class="form-control" name="price" [(ngModel)]="product.price"
+                              placeholder="Precio" required />
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <textarea class="form-control" rows="10" [(ngModel)]="product.description" name="description"
+                            placeholder="Descripción..." required></textarea>
+                        </div>
+                      </div>
+
+                      <div class="col-md-5 d-flex align-items-stretch">
+
+                        <div class="card card-body">
+
+                          <h4 class="card-title h6 m-0 font-weight-bold text-primary">Imagen del producto</h4>
+
+                          <br>
+                          <img *ngIf="!isNotImage && fileTemp" [src]="fileTemp" class="img-thumbnail" style="max-height: fit-content" required alt="">
+                          <img *ngIf="!register && !fileTemp" [src]="product.photo | image" class="img-thumbnail" style="max-height: fit-content" required alt="">
+                          <br>
+                          <div *ngIf="isNotImage" class="alert alert-danger" role="alert">
+                            <strong>{{imageError}}</strong>
+                          </div>
+
+                          <div class="input-group mt-auto">
+                            <div class="custom-file">
+                              <input type="file" name="image" class="custom-file-input" id="inputGroupFile01" lang="es"
+                                aria-describedby="inputGroupFileAddon01" (change)="onFileChange($event)">
+                              <label class="custom-file-label" for="inputGroupFile01">{{ fileName }}</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
-                    <div class="col-sm-4">
-                      <input type="number" class="form-control form-control-user" placeholder="Precio" />
-                    </div>
-                    <div class="col-sm-3">
-                      <button type="button" class="btn btn-primary shadow" data-toggle="modal"
-                        data-target="#exampleModal"><i class="fas fa-image fa-2x"></i></button>
-                    </div>
-                  </div>
+                    <br>
 
-                  <div class="form-group">
-                    <textarea class="form-control" rows="10" placeholder="Descripción..."></textarea>
-                  </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="fom-group">
+                          <button type="submit" *ngIf="register" class="btn btn-outline-primary btn-block btn-user">Registrar</button>
+                          <button type="submit" *ngIf="!register" class="btn btn-outline-primary btn-block btn-user">Actualizar</button>
+                        </div>
+                      </div>
+                    </div>
 
-                  <div class="fom-group">
-                    <button type="button" class="btn btn-outline-primary btn-block btn-user">Registrar</button>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>

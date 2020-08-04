@@ -1,1 +1,15 @@
-<p>home works!</p>
+
+<div class="container mt-3">
+    <div class="row">
+      <div class="col-md-3 py-2 "  *ngFor="let product of afiliados.products">
+        <div class="card mb-3 h-100 shadow-lg rounded" >
+            <img [src]="product.photo | image" class="card-img-top" alt="...">
+          <div class="card-body row d-flex flex-column justify-content-around">
+            <div class="col">
+              <h6 class="card-title font-title">{{ product.title | slice:0:35}}...</h6>
+            </div>
+              <button class="btn btn-outline-primary btn-block " (click)="detailProduct(product)">Ver más...</button>
+          </div>
+      </div>
+    </div>
+</div>

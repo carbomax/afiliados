@@ -11,9 +11,9 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
-      {path: 'welcome',  component: WelcomeComponent},
-      { path: 'products', component: ProductsComponent },
-      { path: 'categories', component: CategoriesComponent },
+      {path: 'welcome',  component: WelcomeComponent, data: { title: 'Bienvenido', report: false} },
+      { path: 'afiliados', component: ProductsComponent, data: { title: 'Afiliados', report: true} },
+      { path: 'categories', component: CategoriesComponent, data: { title: 'Categorias' , report: true} },
       { path: '', redirectTo: 'welcome', pathMatch: 'full'}
     ]
   }

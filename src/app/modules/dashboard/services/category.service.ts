@@ -22,8 +22,7 @@ export class CategoryService {
 
     return this.http.get(this.URI).subscribe( (resp: any) => {
       this.categories = resp.categories;
-      console.log(this.categories)
-    })
+    });
    }
 
    saveCategory(category: Category){
